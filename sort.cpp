@@ -12,16 +12,17 @@ using namespace std;
 \param [in] data The data set that will be searched
 \returns location of key if found or -1 if not found
 */
-int linearSearch(auto data, auto key);//prototype
-
+//sorting algorithms
+void bubbleSort(auto& data);
+void selectionSort(auto& data);
+void insertSort(auto& data);
 
 int main()
 {
 	vector<string> inputs;
-	string search_key, input;
-	int result;
+	string input;
 
-	cout<<"Welcome to \"search it\". We first need some input data."<<endl;
+	cout<<"Welcome to \"sort it\". We first need some input data."<<endl;
 	cout<<"We'll assume the inputs do not have any spaces."<<endl<<endl;
 	cout<<"To end input type the #-character (followed by Enter)"<<endl<<endl;
 
@@ -41,29 +42,12 @@ int main()
 		exit(1);//nothing to do but quit program
 	}
 
-	cout<<endl<<"To end input type the #-character (followed by Enter)"<<endl<<endl;
-	cout<<"Enter a value to search for: ";
 
+	selectionSort(inputs);
+	for(unsigned i = 0; i < inputs.size(); i++)
+		cout << "[" << i << "] = " << inputs[i] << endl;
 
-	cin>>search_key;
-
-	while(search_key != "#")//perform searches until sentinel entered
-	{
-		result = linearSearch(inputs,search_key);
-
-		cout<<"  '"<<search_key<<"' was ";
-
-		if (result == -1)
-			cout<<"not found";
-		else
-			cout<<"found at index "<<result;
-
-
-		cout<<endl<<endl<<"Enter a value to search for: ";
-		cin>>search_key; 
-	}
-
-	cout<<endl<<"Program \"search it\" is now finished."<<endl<<endl;
+	cout<<endl<<endl<<"Program \"sort it\" is now finished."<<endl<<endl;
 
 	return 0;
 }
@@ -75,4 +59,40 @@ int linearSearch(auto data, auto key)
 			return i;
 	
 	return -1;
+}
+
+void bubbleSort(auto& data)
+{
+	for(unsigned i = 0; i < data.size(); i++)
+		for(unsigned j = 0; j < data.size()-1; j++)
+			if(data[j] > data[j+1])
+				swap(data[j], data[j+1]);
+}
+
+void selectionSort(auto& data)
+{
+	for(unsigned i = 0; i < data.size(); i++)
+	{
+		int small = i;
+		
+		for(unsigned j = i+1; j < data.size(); j++)
+			if(data[j] < data[small])
+				small = j;
+		
+		swap(data[i], data[small]);
+	}
+}
+
+void insertSort(auto& data)
+{
+	for(unsigned i = 0; i < data.size()-1; i++)
+	{
+		int j = i+1;
+		
+		while(j > 0 and data[j] < data[j-1])
+		{
+			swap(data[j], data[j-1]);
+			j--;
+		}
+	}
 }
