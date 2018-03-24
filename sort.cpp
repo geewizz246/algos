@@ -5,13 +5,6 @@
 
 using namespace std;
 
-/**
-\fn linearSearch
-\brief Search data for the first occurrence of key
-\param [in] key The value being searched for
-\param [in] data The data set that will be searched
-\returns location of key if found or -1 if not found
-*/
 //sorting algorithms
 void bubbleSort(auto& data);
 void selectionSort(auto& data);
@@ -44,33 +37,34 @@ int main()
 
 
 	selectionSort(inputs);
-	for(unsigned i = 0; i < inputs.size(); i++)
-		cout << "[" << i << "] = " << inputs[i] << endl;
 
 	cout<<endl<<endl<<"Program \"sort it\" is now finished."<<endl<<endl;
 
 	return 0;
 }
 
-int linearSearch(auto data, auto key)
-{
-	for(unsigned i = 0u; i < data.size(); i++)
-		if(data[i] == key)
-			return i;
-	
-	return -1;
-}
-
 void bubbleSort(auto& data)
 {
+	unsigned passes = 0;
+	
 	for(unsigned i = 0; i < data.size(); i++)
+	{
 		for(unsigned j = 0; j < data.size()-1; j++)
 			if(data[j] > data[j+1])
 				swap(data[j], data[j+1]);
+		
+		if((i+1) % 20000 == 0)
+		{
+			passes += 20000;
+			cout << "Passes completed = " << passes << endl;
+		}
+	}
 }
 
 void selectionSort(auto& data)
 {
+	unsigned passes = 0;
+	
 	for(unsigned i = 0; i < data.size(); i++)
 	{
 		int small = i;
@@ -80,11 +74,19 @@ void selectionSort(auto& data)
 				small = j;
 		
 		swap(data[i], data[small]);
+		
+		if((i+1) % 20000 == 0)
+		{
+			passes += 20000;
+			cout << "Passes completed = " << passes << endl;
+		}
 	}
 }
 
 void insertSort(auto& data)
 {
+	unsigned passes = 0;
+	
 	for(unsigned i = 0; i < data.size()-1; i++)
 	{
 		int j = i+1;
@@ -93,6 +95,12 @@ void insertSort(auto& data)
 		{
 			swap(data[j], data[j-1]);
 			j--;
+		}
+		
+		if((i+1) % 20000 == 0)
+		{
+			passes += 20000;
+			cout << "Passes completed = " << passes << endl;
 		}
 	}
 }
