@@ -4,7 +4,7 @@
 
   Attribute   | Value
   ------------|---------
-  **Time left**   |  ?? Hrs: ?? Min
-  **Algorithm**   |   ...sort
-  **Expected passes** | ?????
-  **Observed passes** | ????
+  **Time left**   |  1 Hrs: 17 Min
+  **Algorithm**   |   Selection Sort
+  **Expected passes** | 220000
+  **Observed passes** | 260000
